@@ -6,5 +6,6 @@ services:
       context: .
       dockerfile: Dockerfile
     image: anime-stream
+    container_name: anime-stream
     ports:
       - "3053:3000"
