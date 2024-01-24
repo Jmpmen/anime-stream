@@ -86,9 +86,11 @@ export function Card({
       </ContextMenu>
       <div className="space-y-1 text-sm">
         <h3 className="font-medium leading-none">{anime.title as string}</h3>
-        <p className="text-xs text-muted-foreground">
-          {anime.genres.join(", ")}
-        </p>
+        {anime.genres && (
+          <p className="text-xs text-muted-foreground">
+            {anime.genres.join(", ")}
+          </p>
+        )}
       </div>
     </div>
   );
