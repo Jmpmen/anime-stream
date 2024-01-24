@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "gogocdn.net",
+        hostname: "s4.anilist.co",
       },
     ],
   },

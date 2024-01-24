@@ -13,6 +13,7 @@ import {
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
 import { IAnimeResult } from "@consumet/extensions/dist/models/types";
+import Link from "next/link";
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   anime: IAnimeResult;
@@ -29,24 +30,32 @@ export function Card({
   className,
   ...props
 }: CardProps) {
+  console.log(anime);
+  const title =
+    typeof anime.title === "string" ? anime.title : anime.title.english;
+  const slug = title
+    ?.replaceAll(" ", "-")
+    .replace(/[^\w\-]/g, "")
+    .toLowerCase();
   return (
-    <div className={cn("space-y-3", className)} {...props}>
-      <ContextMenu>
-        <ContextMenuTrigger>
-          <div className="overflow-hidden rounded-md">
-            <Image
-              src={anime.image as string}
-              alt={anime.title as string}
-              width={width}
-              height={height}
-              className={cn(
-                "h-auto w-auto object-cover transition-all hover:scale-105",
-                aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square"
-              )}
-            />
-          </div>
-        </ContextMenuTrigger>
-        {/* <ContextMenuContent className="w-40">
+    <Link href={`/${slug}-${anime.id}`}>
+      <div className={cn("space-y-3", className)} {...props}>
+        <ContextMenu>
+          <ContextMenuTrigger>
+            <div className="overflow-hidden rounded-md">
+              <Image
+                src={anime.image as string}
+                alt={anime.title as string}
+                width={width}
+                height={height}
+                className={cn(
+                  "h-auto w-auto object-cover transition-all hover:scale-105",
+                  aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square"
+                )}
+              />
+            </div>
+          </ContextMenuTrigger>
+          {/* <ContextMenuContent className="w-40">
           <ContextMenuItem>Add to Library</ContextMenuItem>
           <ContextMenuSub>
             <ContextMenuSubTrigger>Add to Playlist</ContextMenuSubTrigger>
@@ -83,15 +92,16 @@ export function Card({
           <ContextMenuItem>Like</ContextMenuItem>
           <ContextMenuItem>Share</ContextMenuItem>
         </ContextMenuContent> */}
-      </ContextMenu>
-      <div className="space-y-1 text-sm">
-        <h3 className="font-medium leading-none">{anime.title as string}</h3>
-        {anime.genres && (
-          <p className="text-xs text-muted-foreground">
-            {anime.genres.join(", ")}
-          </p>
-        )}
+        </ContextMenu>
+        <div className="space-y-1 text-sm">
+          <h3 className="font-medium leading-none">{title}</h3>
+          {anime.genres && (
+            <p className="text-xs text-muted-foreground">
+              {anime.genres.join(", ")}
+            </p>
+          )}
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }

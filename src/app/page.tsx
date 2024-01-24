@@ -1,13 +1,13 @@
 import HorizontalScroll from "@/components/HorizontalScroll";
-import { getRecentEpisodes, getTopAiring } from "@/services/gogoanime";
+import { getRecentEpisodes, getTopAiring } from "@/services/anilist";
 
 export default async function Home() {
-  const topAiring = await getTopAiring();
-  const recentEpisodes = await getRecentEpisodes();
+  const trending = await getTopAiring();
+  const popular = await getRecentEpisodes();
   return (
     <>
-      <HorizontalScroll title="Top Airing" animes={topAiring} large={true} />
-      <HorizontalScroll title="Recent Episodes" animes={recentEpisodes} />
+      <HorizontalScroll title="Trending" animes={trending} large={true} />
+      <HorizontalScroll title="Popular" animes={popular} />
     </>
   );
 }
