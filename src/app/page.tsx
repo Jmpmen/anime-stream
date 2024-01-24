@@ -1,8 +1,13 @@
-import { ANIME } from "@consumet/extensions";
 import HorizontalScroll from "@/components/HorizontalScroll";
+import { getRecentEpisodes, getTopAiring } from "@/services/gogoanime";
 
 export default async function Home() {
-  const gogoanime = new ANIME.Gogoanime();
-  const { results } = await gogoanime.fetchTopAiring();
-  return <HorizontalScroll title="Top Airing" animes={results} />;
+  const topAiring = await getTopAiring();
+  const recentEpisodes = await getRecentEpisodes();
+  return (
+    <>
+      <HorizontalScroll title="Top Airing" animes={topAiring} large={true} />
+      <HorizontalScroll title="Recent Episodes" animes={recentEpisodes} />
+    </>
+  );
 }
