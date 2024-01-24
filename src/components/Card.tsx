@@ -30,7 +30,6 @@ export function Card({
   className,
   ...props
 }: CardProps) {
-  console.log(anime);
   const title =
     typeof anime.title === "string" ? anime.title : anime.title.english;
   const slug = title
