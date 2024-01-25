@@ -1,4 +1,6 @@
+import Recommendations from "@/components/Recommendations";
 import { getAnimeInfo } from "@/services/anilist";
+import { IAnimeInfo } from "@consumet/extensions";
 
 export default async function InfoPage({
   params,
@@ -10,5 +12,10 @@ export default async function InfoPage({
 
   const animeInfo = await getAnimeInfo(id as string);
 
-  return <div>{JSON.stringify(animeInfo)}</div>;
+  return (
+    <>
+      {/* <div>{JSON.stringify(animeInfo)}</div>; */}
+      <Recommendations recommendations={animeInfo.recommendations} />
+    </>
+  );
 }

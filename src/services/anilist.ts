@@ -1,4 +1,4 @@
-import { META } from "@consumet/extensions";
+import { IAnimeInfo, META } from "@consumet/extensions";
 
 const anilist = new META.Anilist();
 
@@ -22,12 +22,12 @@ export async function getRecentEpisodes() {
   }
 }
 
-export async function getAnimeInfo(anime: string) {
+export async function getAnimeInfo(animeId: string) {
   try {
-    const res = await anilist.fetchAnimeInfo(anime);
+    const res = await anilist.fetchAnimeInfo(animeId);
     return res;
   } catch (error) {
     console.error("Error fetching top airing anime:", error);
-    return [];
+    return {} as IAnimeInfo;
   }
 }
