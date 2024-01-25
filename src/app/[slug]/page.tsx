@@ -1,6 +1,7 @@
 import Recommendations from "@/components/Recommendations";
 import { getAnimeInfo } from "@/services/anilist";
-import { IAnimeInfo } from "@consumet/extensions";
+import { Badge } from "@/components/ui/badge";
+import Banner from "@/components/Banner";
 
 export default async function InfoPage({
   params,
@@ -9,12 +10,11 @@ export default async function InfoPage({
 }) {
   const { slug } = params;
   const id = slug.split("-").pop();
-
   const animeInfo = await getAnimeInfo(id as string);
 
   return (
     <>
-      {/* <div>{JSON.stringify(animeInfo)}</div>; */}
+      <Banner anime={animeInfo}></Banner>
       <Recommendations recommendations={animeInfo.recommendations} />
     </>
   );
