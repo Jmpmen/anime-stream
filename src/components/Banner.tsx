@@ -3,7 +3,7 @@ import { Badge } from "./ui/badge";
 
 export default function Banner({ anime }: { anime: IAnimeInfo }) {
   const title =
-    typeof anime.title === "string" ? anime.title : anime.title.english;
+    typeof anime.title === "string" ? anime.title : anime.title.userPreferred;
   return (
     <div
       className="h-96 flex items-center bg-cover bg-center rounded-b-lg"
