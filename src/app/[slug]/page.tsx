@@ -9,14 +9,16 @@ export default async function InfoPage({
   params: { slug: string };
 }) {
   const { slug } = params;
-  const id = slug.split("-").pop();
-  const animeInfo = await getAnimeInfo(id as string);
+  console.log(slug);
+  // const id = slug.split("-").pop();
+  // const animeInfo = await getAnimeInfo(id as string);
 
   return (
     <>
-      <Banner anime={animeInfo} />
-      {/* <Description anime={animeInfo} /> */}
-      <Recommendations recommendations={animeInfo.recommendations} />
+      {slug}
+      {/* <Banner anime={animeInfo} />
+      <Description anime={animeInfo} />
+      <Recommendations recommendations={animeInfo.recommendations} /> */}
     </>
   );
 }
