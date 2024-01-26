@@ -1,7 +1,7 @@
 import Recommendations from "@/components/Recommendations";
 import { getAnimeInfo } from "@/services/anilist";
-import { Badge } from "@/components/ui/badge";
 import Banner from "@/components/Banner";
+import Description from "@/components/Description";
 
 export default async function InfoPage({
   params,
@@ -14,7 +14,8 @@ export default async function InfoPage({
 
   return (
     <>
-      <Banner anime={animeInfo}></Banner>
+      <Banner anime={animeInfo} />
+      <Description anime={animeInfo} />
       <Recommendations recommendations={animeInfo.recommendations} />
     </>
   );
