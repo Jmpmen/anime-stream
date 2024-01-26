@@ -31,7 +31,7 @@ export function Card({
   ...props
 }: CardProps) {
   const title =
-    typeof anime.title === "string" ? anime.title : anime.title.userPreferred;
+    typeof anime.title === "string" ? anime.title : anime.title.english;
   const slug = title
     ?.replaceAll(" ", "-")
     .replace(/[^\w\-]/g, "")
