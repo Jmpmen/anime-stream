@@ -9,7 +9,7 @@ export default function Recommendations({
 }) {
   return (
     <>
-      <div className="mt-6 space-y-1">
+      <div className="mt-6 space-y-1 px-5">
         <h2 className="text-2xl font-semibold tracking-tight">
           Recommendations
         </h2>
@@ -18,7 +18,7 @@ export default function Recommendations({
         </p> */}
       </div>
       <Separator className="my-4" />
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-2 px-5">
         {recommendations?.slice(0, 20).map((recommendation) => (
           <Card
             key={recommendation.id}
