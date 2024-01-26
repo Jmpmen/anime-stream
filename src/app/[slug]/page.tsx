@@ -15,7 +15,7 @@ export default async function InfoPage({
   return (
     <>
       <Banner anime={animeInfo} />
-      <Description anime={animeInfo} />
+      {/* <Description anime={animeInfo} /> */}
       <Recommendations recommendations={animeInfo.recommendations} />
     </>
   );
