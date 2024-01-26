@@ -18,15 +18,15 @@ export default function Recommendations({
         </p> */}
       </div>
       <Separator className="my-4" />
-      <div className="grid grid-cols-5 gap-2">
-        {recommendations?.map((recommendation) => (
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+        {recommendations?.slice(0, 20).map((recommendation) => (
           <Card
             key={recommendation.id}
             anime={recommendation}
             className={"w-[150px] mx-auto"}
             aspectRatio={"portrait"}
             width={150}
-            height={150}
+            height={200}
           />
         ))}
       </div>

@@ -44,7 +44,7 @@ export function Card({
             <div className="overflow-hidden rounded-md">
               <Image
                 src={anime.image as string}
-                alt={anime.title as string}
+                alt={title as string}
                 width={width}
                 height={height}
                 className={cn(

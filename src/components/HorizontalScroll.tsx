@@ -29,9 +29,9 @@ export default function HorizontalScroll({
                 key={anime.id}
                 anime={anime}
                 className={large ? "w-[200px]" : "w-[150px]"}
-                aspectRatio={large ? "portrait" : "square"}
+                aspectRatio="portrait"
                 width={large ? 200 : 150}
-                height={large ? 200 : 150}
+                height={large ? 264 : 200}
               />
             ))}
           </div>
