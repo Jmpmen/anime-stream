@@ -15,7 +15,7 @@ export default function HorizontalScroll({
   return (
     <>
       <div className="mt-6 space-y-1">
-        <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
+        <h2 className="text-2xl font-semibold tracking-tight ml-2">{title}</h2>
         {/* <p className="text-sm text-muted-foreground">
           Your personal playlists. Updated daily.
         </p> */}
