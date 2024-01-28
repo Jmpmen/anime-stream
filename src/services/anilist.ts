@@ -27,7 +27,7 @@ export async function getAnimeInfo(animeId: string) {
     const res = await anilist.fetchAnimeInfo(animeId);
     return res;
   } catch (error) {
-    console.error("Error fetching top airing anime:", error);
+    console.error("Error fetching anime info:", error);
     return {} as IAnimeInfo;
   }
 }
