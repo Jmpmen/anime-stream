@@ -28,6 +28,6 @@ export async function getAnimeInfo(animeId: string) {
     return res;
   } catch (error) {
     console.error("Error fetching anime info:", error);
-    return {} as IAnimeInfo;
+    return null;
   }
 }
