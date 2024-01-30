@@ -1,4 +1,4 @@
-import { IAnimeInfo, META } from "@consumet/extensions";
+import { META } from "@consumet/extensions";
 
 const anilist = new META.Anilist();
 
