@@ -1,21 +1,22 @@
 "use client";
 
 import { IAnimeEpisode } from "@consumet/extensions/dist/models/types";
-import { Card } from "./Card";
 import { Separator } from "./ui/separator";
 import HLSPlayer from "./ReactPlayer";
 import { useState } from "react";
 
 export default function EpisodeList({
+  animeId,
   episodes,
 }: {
+  animeId: string;
   episodes: IAnimeEpisode[] | undefined;
 }) {
   const [play, setPlay] = useState(false);
-  const [episodeId, setEpisodeId] = useState("");
+  const [episode, setEpisode] = useState<IAnimeEpisode | null>(null);
   return (
     <>
-      {play && <HLSPlayer episodeId={episodeId} />}
+      {play && episode && <HLSPlayer animeId={animeId} episode={episode} />}
       <div className="mt-6 space-y-1 px-5">
         <h2 className="text-2xl font-semibold tracking-tight">Episodes</h2>
         {/* <p className="text-sm text-muted-foreground">
@@ -29,7 +30,7 @@ export default function EpisodeList({
             key={episode.id}
             onClick={() => {
               setPlay(true);
-              setEpisodeId(episode.id);
+              setEpisode(episode);
             }}
           >
             {episode.title}

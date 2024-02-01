@@ -1,11 +1,18 @@
 "use client";
 
 import { getEpisodeSources } from "@/services/anilist";
+import { IAnimeEpisode } from "@consumet/extensions/dist/models/types";
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 
-export default function HLSPlayer({ episodeId }: any) {
-  //   const [url, setUrl] = useState();
+export default function HLSPlayer({
+  animeId,
+  episode,
+}: {
+  animeId: string;
+  episode: IAnimeEpisode;
+}) {
+  const [url, setUrl] = useState("");
   //   const options = {
   //     headers: {
   //       Authorization: `Bearer ${token}`,
@@ -18,10 +25,11 @@ export default function HLSPlayer({ episodeId }: any) {
     //     setUrl(URL.createObjectURL(blob));
     //   });
     async function getURL() {
-      const res = await getEpisodeSources(episodeId);
+      const res = await getEpisodeSources(episode, animeId);
+      setUrl(res);
     }
     getURL();
-  }, [episodeId]);
+  }, [episode]);
 
-  return <ReactPlayer url={""} width="100%" controls />;
+  return url.length ? <ReactPlayer url={url} width="100%" controls /> : null;
 }

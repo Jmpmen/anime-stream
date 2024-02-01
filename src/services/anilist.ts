@@ -1,6 +1,9 @@
-import { META } from "@consumet/extensions";
+import { ANIME, IAnimeEpisode, META } from "@consumet/extensions";
 
 const anilist = new META.Anilist();
+const gogoanime = new ANIME.Gogoanime();
+const zoro = new ANIME.Zoro();
+const anify = new ANIME.Anify();
 
 export async function getTopAiring() {
   try {
@@ -32,15 +35,21 @@ export async function getAnimeInfo(animeId: string) {
   }
 }
 
-export async function getEpisodeSources(episodeId: string) {
+export async function getEpisodeSources(
+  episode: IAnimeEpisode,
+  animeId: string
+) {
   try {
-    console.log("hello");
-    const res = await anilist.fetchEpisodeSources(episodeId);
-    console.log("hi");
-    console.log(res);
-    return res;
+    console.log(episode);
+    const res = await anify.fetchEpisodeSources(
+      episode.id,
+      episode.number,
+      +animeId
+    );
+    const video = res.sources.find((video) => video.quality === "default");
+    return video ? video.url : "";
   } catch (error) {
     console.error("Error fetching anime info:", error);
-    return null;
+    return "";
   }
 }
