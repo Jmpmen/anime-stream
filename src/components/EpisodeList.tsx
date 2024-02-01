@@ -1,8 +1,9 @@
 "use client";
 
+import { Button } from "./ui/button";
+import HLSPlayer from "./ReactPlayer";
 import { IAnimeEpisode } from "@consumet/extensions/dist/models/types";
 import { Separator } from "./ui/separator";
-import HLSPlayer from "./ReactPlayer";
 import { useState } from "react";
 
 export default function EpisodeList({
@@ -24,17 +25,17 @@ export default function EpisodeList({
         </p> */}
       </div>
       <Separator className="my-4" />
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-2 px-5">
-        {episodes?.slice(0, 20).map((episode) => (
-          <p
+      <div className="grid grid-cols-5 md:grid-cols-10 gap-2 px-5">
+        {episodes?.map((episode) => (
+          <Button
             key={episode.id}
             onClick={() => {
               setPlay(true);
               setEpisode(episode);
             }}
           >
-            {episode.title}
-          </p>
+            {episode.number}
+          </Button>
         ))}
       </div>
     </>
