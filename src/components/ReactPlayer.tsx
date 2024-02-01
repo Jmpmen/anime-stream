@@ -32,6 +32,13 @@ export default function HLSPlayer({
   }, [episode]);
 
   return url.length ? (
-    <ReactPlayer playing url={url} width="100%" controls />
+    <ReactPlayer
+      playing
+      pip
+      stopOnUnmount={false}
+      url={url}
+      width="100%"
+      controls
+    />
   ) : null;
 }
