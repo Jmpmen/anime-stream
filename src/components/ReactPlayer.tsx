@@ -33,12 +33,12 @@ export default function HLSPlayer({
 
   return url.length ? (
     <ReactPlayer
-      playing
+      controls
       pip
+      playing
       stopOnUnmount={false}
       url={url}
       width="100%"
-      controls
     />
   ) : null;
 }

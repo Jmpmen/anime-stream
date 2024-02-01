@@ -16,7 +16,6 @@ export default async function InfoPage({
   const { slug } = params;
   const id = slug.split("-").pop();
   const animeInfo = await getAnimeInfo(id as string);
-  console.log(animeInfo);
 
   return animeInfo ? (
     <>
@@ -29,6 +28,8 @@ export default async function InfoPage({
     <div>Page not found</div>
   );
 }
+
+export const revalidate = 3600;
 
 // export async function generateStaticParams() {
 //   const trending = await getTopAiring();

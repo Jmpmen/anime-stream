@@ -40,7 +40,6 @@ export async function getEpisodeSources(
   animeId: string
 ) {
   try {
-    console.log(episode);
     const res = await anify.fetchEpisodeSources(
       episode.id,
       episode.number,
