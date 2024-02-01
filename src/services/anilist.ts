@@ -31,3 +31,16 @@ export async function getAnimeInfo(animeId: string) {
     return null;
   }
 }
+
+export async function getEpisodeSources(episodeId: string) {
+  try {
+    console.log("hello");
+    const res = await anilist.fetchEpisodeSources(episodeId);
+    console.log("hi");
+    console.log(res);
+    return res;
+  } catch (error) {
+    console.error("Error fetching anime info:", error);
+    return null;
+  }
+}

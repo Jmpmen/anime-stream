@@ -6,6 +6,7 @@ import {
 } from "@/services/anilist";
 import Banner from "@/components/Banner";
 import Description from "@/components/Description";
+import EpisodeList from "@/components/EpisodeList";
 
 export default async function InfoPage({
   params,
@@ -20,6 +21,7 @@ export default async function InfoPage({
     <>
       <Banner anime={animeInfo} />
       <Description anime={animeInfo} />
+      <EpisodeList episodes={animeInfo.episodes} />
       <Recommendations recommendations={animeInfo.recommendations} />
     </>
   ) : (
