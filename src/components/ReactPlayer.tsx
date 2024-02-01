@@ -31,5 +31,7 @@ export default function HLSPlayer({
     getURL();
   }, [episode]);
 
-  return url.length ? <ReactPlayer url={url} width="100%" controls /> : null;
+  return url.length ? (
+    <ReactPlayer playing url={url} width="100%" controls />
+  ) : null;
 }
