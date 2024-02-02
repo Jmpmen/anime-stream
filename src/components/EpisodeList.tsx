@@ -32,8 +32,13 @@ export default function EpisodeList({
           <Button
             key={episode.id}
             onClick={() => {
-              setPlay(true);
-              setEpisodeInfo(episode);
+                if (episodeInfo?.id !== episode.id) {
+                  setPlay(true);
+                  setEpisodeInfo(episode);
+                } else {
+                  setPlay(!play);
+                  setEpisodeInfo(null);
+                }
             }}
             className={episodeInfo?.id === episode.id ? "text-yellow-400" : ""}
           >
