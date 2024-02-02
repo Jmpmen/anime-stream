@@ -7,17 +7,19 @@ export default function Banner({ anime }: { anime: IAnimeInfo }) {
   return (
     <div
       className="h-96 flex items-center bg-cover bg-center rounded-b-lg"
-      style={{ backgroundImage: `url(${anime.cover})` }}
+      style={{
+        backgroundImage: `linear-gradient(to right, rgba(30, 41, 59, 1), rgba(0, 0, 0, 0)), url(${anime.cover})`,
+      }}
     >
-      <div className="text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] mx-auto md:ml-24">
-        <h1 className="text-xl md:text-5xl font-semibold tracking-tight">
+      <div className="text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] mx-auto md:ml-24 w-60">
+        <h1 className="text-xl md:text-4xl font-semibold tracking-tight">
           {title}
           <Badge className="ml-1">{anime.releaseDate}</Badge>
         </h1>
         {anime.rating && (
-          <p className="text-xs md:text-lg">⭐️ {anime.rating / 10}</p>
+          <p className="text-xs md:text-md">⭐️ {anime.rating / 10}</p>
         )}
-        <p className="text-xs md:text-lg">{anime.genres?.join(" ,")}</p>
+        <p className="text-xs md:text-md">{anime.genres?.join(" ,")}</p>
       </div>
     </div>
   );
