@@ -19,7 +19,7 @@ export default function Banner({ anime }: { anime: IAnimeInfo }) {
         {anime.rating && (
           <p className="text-xs md:text-md">⭐️ {anime.rating / 10}</p>
         )}
-        <p className="text-xs md:text-md">{anime.genres?.join(" ,")}</p>
+        <p className="text-xs md:text-md">{anime.genres?.join(", ")}</p>
       </div>
     </div>
   );
