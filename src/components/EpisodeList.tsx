@@ -14,10 +14,12 @@ export default function EpisodeList({
   episodes: IAnimeEpisode[] | undefined;
 }) {
   const [play, setPlay] = useState(false);
-  const [episode, setEpisode] = useState<IAnimeEpisode | null>(null);
+  const [episodeInfo, setEpisodeInfo] = useState<IAnimeEpisode | null>(null);
   return (
     <>
-      {play && episode && <HLSPlayer animeId={animeId} episode={episode} />}
+      {play && episodeInfo && (
+        <HLSPlayer animeId={animeId} episode={episodeInfo} />
+      )}
       <div className="mt-6 space-y-1 px-5">
         <h2 className="text-2xl font-semibold tracking-tight">Episodes</h2>
         {/* <p className="text-sm text-muted-foreground">
@@ -31,8 +33,9 @@ export default function EpisodeList({
             key={episode.id}
             onClick={() => {
               setPlay(true);
-              setEpisode(episode);
+              setEpisodeInfo(episode);
             }}
+            className={episodeInfo?.id === episode.id ? "text-yellow-400" : ""}
           >
             {episode.number}
           </Button>
