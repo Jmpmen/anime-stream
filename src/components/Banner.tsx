@@ -12,8 +12,8 @@ export default function Banner({ anime }: { anime: IAnimeInfo }) {
       }}
     >
       <div className="text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] mx-auto md:ml-24 w-60">
-        <h1 className="text-xl md:text-4xl font-semibold tracking-tight">
-          {title}
+        <h1 className="text-2xl md:text-4xl font-semibold tracking-tight capitalize">
+          {title?.toLowerCase()}
           <Badge className="ml-1">{anime.releaseDate}</Badge>
         </h1>
         {anime.rating && (
