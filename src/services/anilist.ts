@@ -53,12 +53,12 @@ export async function getTopAiring() {
   }
 }
 
-export async function searchAnime(input: string) {
+export async function searchAnime(input: string, page: number) {
   try {
-    const { results } = await anilist.search(input);
-    return results;
+    const res = await anilist.search(input, page, 20);
+    return res;
   } catch (error) {
     console.error("Anime not found", error);
-    return [];
+    return { currentPage: 1, hasNextPage: false, results: [] };
   }
 }
