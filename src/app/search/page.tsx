@@ -33,7 +33,7 @@ export default function SearchPage() {
 
   return (
     <>
-      <div className="mt-5 grid grid-cols-2 md:grid-cols-5 gap-2 px-5">
+      <div className="mt-5 grid grid-cols-2 md:grid-cols-5 gap-2 px-5 mb-5">
         {results?.map((result) => (
           <Card
             key={result.id}
@@ -46,11 +46,9 @@ export default function SearchPage() {
         ))}
       </div>
       <div
-        className={`${
-          hasNextPage ? "grid place-content-center my-2" : "hidden"
-        }`}
+        className={`${hasNextPage ? "grid place-content-center" : "hidden"}`}
       >
-        <Button onClick={() => fetchAnime(page)}>
+        <Button onClick={() => fetchAnime(page)} variant="secondary">
           {isLoading ? (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           ) : (
