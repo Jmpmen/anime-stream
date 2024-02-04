@@ -1,9 +1,11 @@
 import { ANIME, IAnimeEpisode, META } from "@consumet/extensions";
 
 const anilist = new META.Anilist();
-const gogoanime = new ANIME.Gogoanime();
-const zoro = new ANIME.Zoro();
 const anify = new ANIME.Anify();
+// const animefox = new ANIME.AnimeFox();
+// const animesaturn = new ANIME.AnimeSaturn();
+// const gogoanime = new ANIME.Gogoanime();
+// const zoro = new ANIME.Zoro();
 
 export async function getAnimeInfo(animeId: string) {
   try {
