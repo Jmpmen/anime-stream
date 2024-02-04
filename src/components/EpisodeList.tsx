@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import HLSPlayer from "./ReactPlayer";
 import { IAnimeEpisode } from "@consumet/extensions/dist/models/types";
 import { Separator } from "./ui/separator";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function EpisodeList({
   animeId,
@@ -14,12 +14,30 @@ export default function EpisodeList({
   episodes: IAnimeEpisode[] | undefined;
 }) {
   const [play, setPlay] = useState(false);
+  const playerRef = useRef<HTMLDivElement>(null);
   const [episodeInfo, setEpisodeInfo] = useState<IAnimeEpisode | null>(null);
+
+  function handleClick(episode: IAnimeEpisode) {
+    if (episodeInfo?.id !== episode.id) {
+      setPlay(true);
+      setEpisodeInfo(episode);
+      playerRef?.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "nearest",
+      });
+    } else {
+      setPlay(!play);
+      setEpisodeInfo(null);
+    }
+  }
   return (
     <>
-      {play && episodeInfo && (
-        <HLSPlayer animeId={animeId} episode={episodeInfo} />
-      )}
+      <div ref={playerRef}>
+        {play && episodeInfo && (
+          <HLSPlayer animeId={animeId} episode={episodeInfo} />
+        )}
+      </div>
       <div className="mt-6 space-y-1 px-5">
         <h2 className="text-2xl font-semibold tracking-tight">Episodes</h2>
         {/* <p className="text-sm text-muted-foreground">
@@ -31,15 +49,7 @@ export default function EpisodeList({
         {episodes?.map((episode) => (
           <Button
             key={episode.id}
-            onClick={() => {
-                if (episodeInfo?.id !== episode.id) {
-                  setPlay(true);
-                  setEpisodeInfo(episode);
-                } else {
-                  setPlay(!play);
-                  setEpisodeInfo(null);
-                }
-            }}
+            onClick={() => handleClick(episode)}
             className={episodeInfo?.id === episode.id ? "text-yellow-400" : ""}
           >
             {episode.number}
