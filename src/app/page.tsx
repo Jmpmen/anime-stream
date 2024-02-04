@@ -1,9 +1,9 @@
 import HorizontalScroll from "@/components/HorizontalScroll";
-import { getRecentEpisodes, getTopAiring } from "@/services/anilist";
+import { getPopular, getTrending } from "@/services/anilist";
 
 export default async function Home() {
-  const trending = await getTopAiring();
-  const popular = await getRecentEpisodes();
+  const trending = await getTrending();
+  const popular = await getPopular();
   return (
     <>
       <HorizontalScroll title="Trending" animes={trending} large={true} />

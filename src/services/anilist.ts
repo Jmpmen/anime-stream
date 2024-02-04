@@ -35,22 +35,22 @@ export async function getEpisodeSources(
   }
 }
 
-export async function getRecentEpisodes() {
+export async function getPopular() {
   try {
     const { results } = await anilist.fetchPopularAnime();
     return results;
   } catch (error) {
-    console.error("Error fetching recent episodes:", error);
+    console.error("Error fetching popular animes:", error);
     return [];
   }
 }
 
-export async function getTopAiring() {
+export async function getTrending() {
   try {
     const { results } = await anilist.fetchTrendingAnime();
     return results;
   } catch (error) {
-    console.error("Error fetching top airing anime:", error);
+    console.error("Error fetching top airing animes:", error);
     return [];
   }
 }
