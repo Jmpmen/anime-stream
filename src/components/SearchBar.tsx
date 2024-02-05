@@ -22,7 +22,7 @@ export default function SearchBar({ className }: { className?: string }) {
       onChange={(e) => setInput(e.target.value)}
       onKeyDown={handleSubmit}
       placeholder="Search..."
-      type="text"
+      type="search"
       value={input}
     />
   );
