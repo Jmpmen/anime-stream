@@ -1,9 +1,5 @@
 import Recommendations from "@/components/Recommendations";
-import {
-  getAnimeInfo,
-  getRecentEpisodes,
-  getTopAiring,
-} from "@/services/anilist";
+import { getAnimeInfo } from "@/services/anilist";
 import Banner from "@/components/Banner";
 import Description from "@/components/Description";
 import EpisodeList from "@/components/EpisodeList";
@@ -32,8 +28,8 @@ export default async function InfoPage({
 export const revalidate = 3600;
 
 // export async function generateStaticParams() {
-//   const trending = await getTopAiring();
-//   const popular = await getRecentEpisodes();
+//   const trending = await getTrending();
+//   const popular = await getPopular();
 //   const animes = [...trending, ...popular];
 
 //   return animes.map((anime) => ({ slug: anime.id }));
