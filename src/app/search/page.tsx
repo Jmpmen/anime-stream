@@ -18,10 +18,10 @@ export default function SearchPage() {
 
   async function fetchAnime(page: number) {
     setIsLoading(true);
-    const res = await searchAnime(search, page);
-    setPage((prev) => prev + 1);
-    setHasNextPage(!!res?.hasNextPage);
-    setResults((prev) => [...prev, ...res.results]);
+    const { hasNextPage, results } = await searchAnime(search, page);
+    setResults((prev) => [...prev, ...results]);
+    setHasNextPage(!!hasNextPage);
+    setPage(page + 1);
     setIsLoading(false);
   }
 
