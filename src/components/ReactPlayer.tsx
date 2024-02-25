@@ -26,6 +26,7 @@ export default function HLSPlayer({
     //   });
     async function getURL() {
       const res = await getEpisodeSources(episode, animeId);
+      // const blob = fetch(res, {headers: {}})
       setUrl(res);
     }
     getURL();
