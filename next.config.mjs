@@ -3,11 +3,12 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "s4.anilist.co",
+        protocol: 'https',
+        hostname: 's4.anilist.co',
       },
     ],
   },
+  output: 'standalone',
 };
 
 export default nextConfig;
