@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  anime-stream:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: anime-stream
+    ports:
+      - "3000:3000"
