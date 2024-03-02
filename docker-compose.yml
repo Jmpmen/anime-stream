@@ -7,4 +7,4 @@ services:
       dockerfile: Dockerfile
     image: anime-stream
     ports:
-      - "3000:3000"
+      - "3053:3000"
