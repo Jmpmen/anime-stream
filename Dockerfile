@@ -1,4 +1,4 @@
-FROM node:hydrogen-alpine3.19 AS base
+FROM node:20-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
