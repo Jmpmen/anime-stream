@@ -34,9 +34,7 @@ export default function EpisodeList({
   return (
     <>
       <div ref={playerRef}>
-        {play && episodeInfo && (
-          <HLSPlayer animeId={animeId} episode={episodeInfo} />
-        )}
+        {play && episodeInfo && <HLSPlayer episode={episodeInfo} />}
       </div>
       <div className="mt-6 space-y-1 px-5">
         <h2 className="text-2xl font-semibold tracking-tight">Episodes</h2>

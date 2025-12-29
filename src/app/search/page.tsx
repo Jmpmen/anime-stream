@@ -1,47 +1,58 @@
 "use client";
 
+import { useCallback, useEffect, useState } from "react";
 import { Card } from "@/components/Card";
 import { Button } from "@/components/ui/button";
-import { searchAnime } from "@/services/anilist";
-import { IAnimeResult } from "@consumet/extensions";
 import { Loader2 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
 
 export default function SearchPage() {
   const searchParams = useSearchParams();
   const search = searchParams.get("q") || "";
-  const [results, setResults] = useState<IAnimeResult[]>([]);
+  const [results, setResults] = useState<any[]>([]);
   const [page, setPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  async function fetchAnime(page: number) {
-    setIsLoading(true);
-    const { hasNextPage, results } = await searchAnime(search, page);
-    setResults((prev) => [...prev, ...results]);
-    setHasNextPage(!!hasNextPage);
-    setPage(page + 1);
-    setIsLoading(false);
-  }
+  const fetchAnime = useCallback(
+    async (page: number) => {
+      if (!search) return;
+      setIsLoading(true);
+      try {
+        const res = await fetch(
+          `/api/search?q=${encodeURIComponent(search)}&page=${page}`
+        );
+        const data = await res.json();
+        const { results: newResults = [], hasNextPage: next = false } =
+          data || {};
+        setResults((prev) => [...prev, ...newResults]);
+        setHasNextPage(!!next);
+        setPage(page + 1);
+      } catch (error) {
+        console.error("Search fetch error", error);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [search]
+  );
 
   useEffect(() => {
     setPage(1);
     setResults([]);
-    fetchAnime(1);
-  }, [search]);
+    if (search) fetchAnime(1);
+  }, [fetchAnime, search]);
 
   return (
     <>
-      <div className="mt-5 grid grid-cols-2 md:grid-cols-5 gap-2 px-5 mb-5">
-        {results?.map((result) => (
+      <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-1 px-5 mb-5">
+        {results?.map((result: any) => (
           <Card
             key={result.id}
             anime={result}
-            className={"w-[150px] mx-auto"}
+            className={"w-[180px] mx-auto"}
             aspectRatio={"portrait"}
-            width={150}
-            height={200}
+            width={180}
           />
         ))}
       </div>

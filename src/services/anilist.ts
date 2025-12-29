@@ -1,15 +1,10 @@
-import { ANIME, IAnimeEpisode, META } from "@consumet/extensions";
+import { ANIME, IAnimeEpisode } from "@consumet/extensions";
 
-const anilist = new META.Anilist();
-const anify = new ANIME.Anify();
-// const animefox = new ANIME.AnimeFox();
-// const animesaturn = new ANIME.AnimeSaturn();
-// const gogoanime = new ANIME.Gogoanime();
-// const zoro = new ANIME.Zoro();
+const hianime = new ANIME.Hianime();
 
 export async function getAnimeInfo(animeId: string) {
   try {
-    const res = await anilist.fetchAnimeInfo(animeId);
+    const res = await hianime.fetchAnimeInfo(animeId);
     return res;
   } catch (error) {
     console.error("Error fetching anime info:", error);
@@ -17,17 +12,10 @@ export async function getAnimeInfo(animeId: string) {
   }
 }
 
-export async function getEpisodeSources(
-  episode: IAnimeEpisode,
-  animeId: string
-) {
+export async function getEpisodeSources(episodeId: IAnimeEpisode["id"]) {
   try {
-    const res = await anify.fetchEpisodeSources(
-      episode.id,
-      episode.number,
-      +animeId
-    );
-    const video = res.sources.find((video) => video.quality === "default");
+    const res = await hianime.fetchEpisodeSources(episodeId);
+    const video = res.sources.find((video) => video.quality === "auto");
     return video ? video.url : "";
   } catch (error) {
     console.error("Error fetching episode source:", error);
@@ -37,7 +25,7 @@ export async function getEpisodeSources(
 
 export async function getPopular() {
   try {
-    const { results } = await anilist.fetchPopularAnime();
+    const { results } = await hianime.fetchMostPopular();
     return results;
   } catch (error) {
     console.error("Error fetching popular animes:", error);
@@ -47,7 +35,7 @@ export async function getPopular() {
 
 export async function getTrending() {
   try {
-    const { results } = await anilist.fetchTrendingAnime();
+    const { results } = await hianime.fetchTopAiring();
     return results;
   } catch (error) {
     console.error("Error fetching top airing animes:", error);
@@ -57,7 +45,7 @@ export async function getTrending() {
 
 export async function searchAnime(input: string, page: number) {
   try {
-    const res = await anilist.search(input, page, 20);
+    const res = await hianime.search(input, page);
     return res;
   } catch (error) {
     console.error("Anime not found", error);

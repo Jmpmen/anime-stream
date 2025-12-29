@@ -8,19 +8,9 @@ export default function Description({ anime }: { anime: IAnimeInfo }) {
         <span className="text-sm text-slate-400">{anime.status}</span>
       </div>
       <div>
-        <span className="font-bold">Duration: </span>
-        <span className="text-sm text-slate-400">{anime.duration} min</span>
-      </div>
-      <div>
         <span className="font-bold">Description: </span>
         <span className="text-sm text-slate-400">
           {anime.description?.split("<br>")[0]}
-        </span>
-      </div>
-      <div>
-        <span className="font-bold">Studios: </span>
-        <span className="text-sm text-slate-400">
-          {anime.studios?.join(", ")}
         </span>
       </div>
     </div>

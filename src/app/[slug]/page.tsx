@@ -10,8 +10,7 @@ export default async function InfoPage({
   params: { slug: string };
 }) {
   const { slug } = params;
-  const id = slug.split("-").pop();
-  const animeInfo = await getAnimeInfo(id as string);
+  const animeInfo = await getAnimeInfo(slug);
 
   return animeInfo ? (
     <>
