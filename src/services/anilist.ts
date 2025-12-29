@@ -43,6 +43,16 @@ export async function getTrending() {
   }
 }
 
+export async function getRecentlyUpdated() {
+  try {
+    const { results } = await hianime.fetchRecentlyUpdated();
+    return results;
+  } catch (error) {
+    console.error("Error fetching recently updated animes:", error);
+    return [];
+  }
+}
+
 export async function searchAnime(input: string, page: number) {
   try {
     const res = await hianime.search(input, page);
