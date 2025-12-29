@@ -16,7 +16,7 @@ export default async function InfoPage({
     <>
       <Banner anime={animeInfo} />
       <Description anime={animeInfo} />
-      <EpisodeList animeId={animeInfo.id} episodes={animeInfo.episodes} />
+      <EpisodeList episodes={animeInfo.episodes} />
       <Recommendations recommendations={animeInfo.recommendations} />
     </>
   ) : (

@@ -6,10 +6,19 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const url = await getEpisodeSources(params.id);
-    return NextResponse.json({ url });
+    const data = await getEpisodeSources(params.id);
+    if (!data) {
+      return NextResponse.json(
+        { url: "", sources: [], subtitles: [] },
+        { status: 500 }
+      );
+    }
+    return NextResponse.json(data);
   } catch (error) {
     console.error("API error fetching episode source:", error);
-    return NextResponse.json({ url: "" }, { status: 500 });
+    return NextResponse.json(
+      { url: "", sources: [], subtitles: [] },
+      { status: 500 }
+    );
   }
 }

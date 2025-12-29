@@ -1,18 +1,26 @@
 "use client";
 
-import type { IAnimeEpisode } from "@consumet/extensions/dist/models/types";
 import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
-export default function HLSPlayer({ episode }: { episode: IAnimeEpisode }) {
+export default function HLSPlayer() {
+  const searchParams = useSearchParams();
+  const episodeId = searchParams.get("episode");
   const [sourceUrl, setSourceUrl] = useState<string | null>(null);
   const [subtitle, setSubtitle] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     let mounted = true;
+    if (!episodeId) {
+      setSourceUrl(null);
+      setSubtitle(null);
+      return;
+    }
+
     async function fetchSource() {
       try {
-        const res = await fetch(`/api/episodes/${episode.id}`);
+        const res = await fetch(`/api/episodes/${episodeId}`);
         if (!res.ok) throw new Error("bad response");
         const json = await res.json();
         const src =
@@ -27,11 +35,12 @@ export default function HLSPlayer({ episode }: { episode: IAnimeEpisode }) {
         if (mounted) setSourceUrl(null);
       }
     }
+
     fetchSource();
     return () => {
       mounted = false;
     };
-  }, [episode.id]);
+  }, [episodeId]);
 
   useEffect(() => {
     if (!sourceUrl) return;
@@ -91,6 +100,8 @@ export default function HLSPlayer({ episode }: { episode: IAnimeEpisode }) {
     };
   }, [sourceUrl]);
 
+  if (!episodeId) return null;
+
   return (
     <div className="w-full">
       <video
@@ -100,7 +111,9 @@ export default function HLSPlayer({ episode }: { episode: IAnimeEpisode }) {
         autoPlay
         style={{ width: "100%", height: "auto" }}
       >
-        {subtitle && <track kind="captions" srcLang="en" src={subtitle} />}
+        {subtitle && (
+          <track kind="captions" srcLang="en" src={subtitle} default />
+        )}
       </video>
     </div>
   );

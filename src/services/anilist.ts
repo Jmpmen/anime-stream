@@ -15,11 +15,10 @@ export async function getAnimeInfo(animeId: string) {
 export async function getEpisodeSources(episodeId: IAnimeEpisode["id"]) {
   try {
     const res = await hianime.fetchEpisodeSources(episodeId);
-    const video = res.sources.find((video) => video.quality === "auto");
-    return video ? video.url : "";
+    return res;
   } catch (error) {
     console.error("Error fetching episode source:", error);
-    return "";
+    return null;
   }
 }
 
