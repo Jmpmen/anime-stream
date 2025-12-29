@@ -8,7 +8,7 @@ export default function Footer() {
           Copyright © {new Date().getFullYear()} - All rights reserved by{" "}
         </span>
         <Link
-          href="https://jmpmen.netlify.app"
+          href="https://jmpmen.com"
           target="_blank"
           className="italic hover:underline text-nowrap"
         >
