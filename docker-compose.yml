@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   anime-stream:
     build:
@@ -9,3 +7,4 @@ services:
     container_name: anime-stream
     ports:
       - "3053:3000"
+    restart: unless-stopped
