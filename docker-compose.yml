@@ -1,9 +1,6 @@
 services:
   anime-stream:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: anime-stream
+    image: ghcr.io/jmpmen/anime-stream:latest
     container_name: anime-stream
     ports:
       - "3053:3000"
