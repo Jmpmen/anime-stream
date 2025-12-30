@@ -1,14 +1,30 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
 
-export default function HLSPlayer() {
-  const searchParams = useSearchParams();
-  const episodeId = searchParams.get("episode");
+export default function HLSPlayer({ episodeId }: { episodeId: string | null }) {
   const [sourceUrl, setSourceUrl] = useState<string | null>(null);
   const [subtitle, setSubtitle] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const hlsRef = useRef<any | null>(null);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (el) {
+      el.pause();
+      if (hlsRef.current) {
+        try {
+          hlsRef.current.destroy();
+          hlsRef.current = null;
+        } catch (e) {
+          /* ignore */
+        }
+      }
+      el.removeAttribute("src");
+      el.load();
+    }
+    setSourceUrl(null);
+  }, [episodeId]);
 
   useEffect(() => {
     let mounted = true;
@@ -63,6 +79,7 @@ export default function HLSPlayer() {
           const Hls = HlsModule.default || HlsModule;
           if (Hls.isSupported()) {
             hls = new Hls();
+            hlsRef.current = hls;
             hls.loadSource(sourceUrl);
             hls.attachMedia(el);
           } else {

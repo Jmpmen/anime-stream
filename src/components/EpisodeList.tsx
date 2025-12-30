@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import HLSPlayer from "./ReactPlayer";
 import { IAnimeEpisode } from "@consumet/extensions/dist/models/types";
 import { Separator } from "./ui/separator";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 export default function EpisodeList({
@@ -15,13 +15,22 @@ export default function EpisodeList({
   const playerRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
-  const currentEpisodeId = searchParams.get("episode") || null;
-
   const pathname = usePathname();
+  const urlEpisodeId = searchParams.get("episode") || null;
+
+  const [selectedEpisodeId, setSelectedEpisodeId] = useState<string | null>(
+    urlEpisodeId
+  );
+
+  useEffect(() => {
+    setSelectedEpisodeId(urlEpisodeId);
+  }, [urlEpisodeId]);
 
   function handleClick(episode: IAnimeEpisode) {
     const params = new URLSearchParams(searchParams.toString());
-    if (currentEpisodeId === episode.id) {
+
+    if (selectedEpisodeId === episode.id) {
+      setSelectedEpisodeId(null);
       params.delete("episode");
       router.replace(
         `${pathname}${params.toString() ? `?${params.toString()}` : ""}`
@@ -29,6 +38,7 @@ export default function EpisodeList({
       return;
     }
 
+    setSelectedEpisodeId(episode.id);
     params.set("episode", episode.id);
     router.replace(`${pathname}?${params.toString()}`);
 
@@ -43,7 +53,9 @@ export default function EpisodeList({
 
   return (
     <>
-      <div ref={playerRef}>{currentEpisodeId && <HLSPlayer />}</div>
+      <div ref={playerRef}>
+        {selectedEpisodeId && <HLSPlayer episodeId={selectedEpisodeId} />}
+      </div>
       <div className="mt-6 space-y-1 px-5">
         <h2 className="text-2xl font-semibold tracking-tight">Episodes</h2>
       </div>
@@ -53,7 +65,9 @@ export default function EpisodeList({
           <Button
             key={episode.id}
             onClick={() => handleClick(episode)}
-            className={currentEpisodeId === episode.id ? "text-yellow-400" : ""}
+            className={
+              selectedEpisodeId === episode.id ? "text-yellow-400" : ""
+            }
           >
             {episode.number}
           </Button>
